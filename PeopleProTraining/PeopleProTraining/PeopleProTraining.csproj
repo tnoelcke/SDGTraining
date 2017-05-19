@@ -171,6 +171,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705191742132_InitialCreate.cs" />
+    <Compile Include="Migrations\201705191742132_InitialCreate.Designer.cs">
+      <DependentUpon>201705191742132_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Building.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Employee.cs" />
@@ -209,6 +214,11 @@
       <Project>{5d101c0e-0749-4f64-807f-696b03800d9a}</Project>
       <Name>PeopleProTraining.Dal</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201705191742132_InitialCreate.resx">
+      <DependentUpon>201705191742132_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
