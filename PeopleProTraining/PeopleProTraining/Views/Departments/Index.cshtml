@@ -1,7 +1,7 @@
-﻿@model List<PeopleProTraining.Models.Employee>
+﻿@model IEnumerable<PeopleProTraining.Models.Department>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Departments";
 }
 
 <h2>Index</h2>
@@ -12,7 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            <p>First Name</p>
+            @Html.DisplayNameFor(model => model.Building.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
         </th>
         <th></th>
     </tr>
@@ -20,7 +23,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.firstName)
+            @Html.DisplayFor(modelItem => item.Building.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

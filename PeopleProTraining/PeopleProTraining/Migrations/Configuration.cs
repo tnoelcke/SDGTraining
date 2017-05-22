@@ -29,37 +29,38 @@ namespace PeopleProTraining.Migrations
             //    );
             //
 
-            var employees = new List<Employee>
-            {
-                new Employee { firstName ="Thoams", lastName = "Noelcke", DepartmentID = 0 },
-                new Employee { firstName = "Bob", lastName = "Collier", DepartmentID = 1 },
-                new Employee {firstName = "Liz", lastName = "Miller", DepartmentID = 2 },
-                new Employee {firstName = "Nikita", lastName = "Noelcket", DepartmentID = 3 }
-
-            };
-
-            employees.ForEach(s => context.Employees.Add(s));
-            context.SaveChanges();
-
-            var departments = new List<Department>
-            {
-                new Department {ID = 0, name = "Software", BuildingID = 0 },
-                new Department {ID = 1, name = "Civil Engineering", BuildingID = 1},
-                new Department {ID = 2, name = "Graphic Design", BuildingID = 2 },
-                new Department {ID = 3, name = "Teaching", BuildingID = 3 }
-            };
-
-            departments.ForEach(s => context.Departments.Add(s));
-
             var buildings = new List<Building>
             {
                 new Building {ID = 0, name = "Engineering Office", number = 122, address = "35110 Some Place" },
-                new Building {ID = 1, name = "Engineering Offivce", number = 123, address = "35110 Some Place" },
+                new Building {ID = 1, name = "Civil Engineering Office", number = 123, address = "35110 Some Place" },
                 new Building {ID = 2, name = "Graphic Design Center", number = 100, address = "35000 maple Place" },
                 new Building {ID = 3, name = "Middle School", number = 100, address = "2001 Staton BLVD" }
             };
 
             buildings.ForEach(s => context.Buildings.Add(s));
+            context.SaveChanges();
+
+            var departments = new List<Department>
+            {
+                new Department { ID = 0, name = "Software", BuildingID = buildings.Single(b => b.name == "Engineering Office").ID},
+                new Department { ID = 1, name = "Civil Engineering", BuildingID = buildings.Single(b => b.name == "Civil Engineering Office").ID},
+                new Department { ID = 2, name = "Graphic Design", BuildingID = buildings.Single(b => b.name == "Graphic Design Center").ID},
+                new Department { ID = 3, name = "Teaching", BuildingID = buildings.Single(b => b.name == "Middle School").ID}
+            };
+
+            departments.ForEach(d => context.Departments.Add(d));
+            context.SaveChanges();
+
+            var employees = new List<Employee>
+            {
+                new Employee {firstName ="Thomas", lastName = "Noelcke", DepartmentID = departments.Single(d => d.name == "Software").ID },
+                new Employee {firstName = "Bob", lastName = "Collier", DepartmentID = departments.Single(d => d.name == "Civil Engineering").ID},
+                new Employee {firstName = "Liz", lastName = "Miller", DepartmentID = departments.Single(d => d.name == "Graphic Design").ID},
+                new Employee {firstName = "Nikita", lastName = "Noelcket", DepartmentID = departments.Single(d => d.name == "Teaching").ID}
+
+            };
+
+            employees.ForEach(s => context.Employees.Add(s));
             context.SaveChanges();
         }
     }

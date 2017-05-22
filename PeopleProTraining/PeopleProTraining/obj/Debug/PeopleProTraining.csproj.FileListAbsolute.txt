@@ -54,3 +54,4 @@ C:\Users\noelcket\Documents\SDGTraining\PeopleProTraining\PeopleProTraining\obj\
 C:\Users\noelcket\Documents\SDGTraining\PeopleProTraining\PeopleProTraining\obj\Debug\PeopleProTraining.pdb
 C:\Users\noelcket\Documents\SDGTraining\PeopleProTraining\PeopleProTraining\obj\Debug\PeopleProTraining.Migrations.InitialCreate.resources
 C:\Users\noelcket\Documents\SDGTraining\PeopleProTraining\PeopleProTraining\obj\Debug\PeopleProTraining.csproj.GenerateResource.Cache
+C:\Users\noelcket\Documents\SDGTraining\PeopleProTraining\PeopleProTraining\obj\Debug\PeopleProTraining.Migrations.fixedDisplay.resources

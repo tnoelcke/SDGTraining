@@ -164,6 +164,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BuildingsController.cs" />
+    <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\CompanyContext.cs" />
@@ -174,6 +176,10 @@
     <Compile Include="Migrations\201705191742132_InitialCreate.cs" />
     <Compile Include="Migrations\201705191742132_InitialCreate.Designer.cs">
       <DependentUpon>201705191742132_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705221659412_fixedDisplay.cs" />
+    <Compile Include="Migrations\201705221659412_fixedDisplay.Designer.cs">
+      <DependentUpon>201705221659412_fixedDisplay.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Building.cs" />
@@ -188,6 +194,16 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="scripts\jquery-1.9.1.min.map" />
+    <Content Include="Views\Buildings\Create.cshtml" />
+    <Content Include="Views\Buildings\Delete.cshtml" />
+    <Content Include="Views\Buildings\Details.cshtml" />
+    <Content Include="Views\Buildings\Edit.cshtml" />
+    <Content Include="Views\Buildings\Index.cshtml" />
+    <Content Include="Views\Departments\Create.cshtml" />
+    <Content Include="Views\Departments\Delete.cshtml" />
+    <Content Include="Views\Departments\Details.cshtml" />
+    <Content Include="Views\Departments\Edit.cshtml" />
+    <Content Include="Views\Departments\Index.cshtml" />
     <Content Include="Views\Employees\Create.cshtml" />
     <Content Include="Views\Employees\Delete.cshtml" />
     <Content Include="Views\Employees\Details.cshtml" />
@@ -218,6 +234,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705191742132_InitialCreate.resx">
       <DependentUpon>201705191742132_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705221659412_fixedDisplay.resx">
+      <DependentUpon>201705221659412_fixedDisplay.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

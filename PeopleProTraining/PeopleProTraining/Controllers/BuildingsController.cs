@@ -7,113 +7,111 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PeopleProTraining.DAL;
-using PeopleProTraining.Dal.Models;
 using PeopleProTraining.Models;
-
 
 namespace PeopleProTraining.Controllers
 {
-    public class EmployeesController : Controller
+    public class BuildingsController : Controller
     {
         private CompanyContext db = new CompanyContext();
 
-        // GET: Employees
+        // GET: Buildings
         public ActionResult Index()
         {
-            return View(db.Employees.ToList());
+            return View(db.Buildings.ToList());
         }
 
-        // GET: Employees/Details/5
+        // GET: Buildings/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            Building building = db.Buildings.Find(id);
+            if (building == null)
             {
                 return HttpNotFound();
             }
-            return View(employee);
+            return View(building);
         }
 
-        // GET: Employees/Create
+        // GET: Buildings/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Employees/Create
+        // POST: Buildings/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName")] Models.Employee employee)
+        public ActionResult Create([Bind(Include = "ID,name,number,address")] Building building)
         {
             if (ModelState.IsValid)
             {
-                db.Employees.Add(employee);
+                db.Buildings.Add(building);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(employee);
+            return View(building);
         }
 
-        // GET: Employees/Edit/5
+        // GET: Buildings/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            Building building = db.Buildings.Find(id);
+            if (building == null)
             {
                 return HttpNotFound();
             }
-            return View(employee);
+            return View(building);
         }
 
-        // POST: Employees/Edit/5
+        // POST: Buildings/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName")] Models.Employee employee)
+        public ActionResult Edit([Bind(Include = "ID,name,number,address")] Building building)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(employee).State = EntityState.Modified;
+                db.Entry(building).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(employee);
+            return View(building);
         }
 
-        // GET: Employees/Delete/5
+        // GET: Buildings/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            Building building = db.Buildings.Find(id);
+            if (building == null)
             {
                 return HttpNotFound();
             }
-            return View(employee);
+            return View(building);
         }
 
-        // POST: Employees/Delete/5
+        // POST: Buildings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Models.Employee employee = db.Employees.Find(id);
-            db.Employees.Remove(employee);
+            Building building = db.Buildings.Find(id);
+            db.Buildings.Remove(building);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -10,6 +10,7 @@ namespace PeopleProTraining.Models
     public class Department
     {
         public int ID { get; set; }
+        [Display(Name = "Department Name")]
         public string name { set; get; }
         [ForeignKey("Building")]
         public int BuildingID { set; get; }

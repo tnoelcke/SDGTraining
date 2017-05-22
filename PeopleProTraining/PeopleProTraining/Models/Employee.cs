@@ -12,7 +12,9 @@ namespace PeopleProTraining.Models
     public class Employee
     {
         public int ID { get; set; }
+        [Display(Name = "First Name")]
         public string firstName { get; set; }
+        [Display(Name = "Last Name")]
         public string lastName { get; set; }
 
         [ForeignKey("Department")]
