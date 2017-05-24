@@ -18,6 +18,7 @@ namespace PeopleProTraining.Models
         public string lastName { get; set; }
 
         [ForeignKey("Department")]
+        [Display(Name = "Department ID")]
         public int DepartmentID { get; set; }
         public virtual Department Department { get; set;}
     }

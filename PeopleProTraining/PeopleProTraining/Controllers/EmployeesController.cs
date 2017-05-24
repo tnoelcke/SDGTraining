@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using PeopleProTraining.DAL;
 using PeopleProTraining.Models;
+using System.Data.Entity.Infrastructure;
 
 namespace PeopleProTraining.Controllers
 {
@@ -41,7 +42,17 @@ namespace PeopleProTraining.Controllers
         // GET: Employees/Create
         public ActionResult Create()
         {
+            PopulateDepartmentDropDownList();
             return View();
+        }
+        
+
+        private void PopulateDepartmentDropDownList(object selectedDepartment = null)
+        {
+            var departmentsQurey = from d in db.Departments
+                                 orderby d.name
+                                 select d;
+            ViewBag.DepartmentID = new SelectList(departmentsQurey, "ID", "Name", selectedDepartment);
         }
 
         // POST: Employees/Create
@@ -49,15 +60,24 @@ namespace PeopleProTraining.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName")] Employee employee)
+        public ActionResult Create([Bind(Include = "firstName, lastName, DepartmentID")] Employee employee)
         {
-            if (ModelState.IsValid)
-            {
-                db.Employees.Add(employee);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Employees.Add(employee);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (RetryLimitExceededException)
+            {
+                //Log the error
+                ModelState.AddModelError("", "Unable to save changes try again.");
+            }
+            PopulateDepartmentDropDownList(employee.DepartmentID);
             return View(employee);
         }
 
@@ -73,23 +93,39 @@ namespace PeopleProTraining.Controllers
             {
                 return HttpNotFound();
             }
+            PopulateDepartmentDropDownList(employee.DepartmentID);
             return View(employee);
         }
 
         // POST: Employees/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName")] Employee employee)
+        public ActionResult EditPost(int? id)
         {
-            if (ModelState.IsValid)
+            if (id == null)
             {
-                db.Entry(employee).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(employee);
+            var employeeToUpdate = db.Employees.Find(id);
+            if (TryUpdateModel(employeeToUpdate, "",
+                new string[] { "First Name", "Last Name", "DepartmentID" }))
+            {
+                try
+                {
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+
+                }
+                catch (RetryLimitExceededException)
+                {
+                    ModelState.AddModelError("", "Unable to save changes. try again");
+                }
+            }
+
+            PopulateDepartmentDropDownList(employeeToUpdate.ID);
+            return View();
         }
 
         // GET: Employees/Delete/5
