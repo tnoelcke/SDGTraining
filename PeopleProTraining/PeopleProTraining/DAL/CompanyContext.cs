@@ -14,6 +14,9 @@ namespace PeopleProTraining.DAL
         }
 
         public DbSet<Employee> Employees { set; get; }
+        /// <summary>
+        /// stuff
+        /// </summary>
         public DbSet<Department> Departments { set; get; }
         public DbSet<Building> Buildings { set; get; }
 

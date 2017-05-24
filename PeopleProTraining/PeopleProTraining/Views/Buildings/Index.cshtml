@@ -1,7 +1,10 @@
-﻿@model IEnumerable<PeopleProTraining.Models.Building>
+﻿@using PeopleProTraining.Models
+@model IEnumerable<Building>
+
 
 @{
     ViewBag.Title = "Index";
+    Building newBuilding = new Building();
 }
 
 <h2>Index</h2>
@@ -20,7 +23,8 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.name)
@@ -29,11 +33,47 @@
             @Html.DisplayFor(modelItem => item.address)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
         </td>
     </tr>
 }
 
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+        <tr>
+            <td>
+            Name: 
+            @Html.TextBox("name")
+            @Html.ValidationMessageFor(model => newBuilding.name, "", new { @class = "text-danger" }) 
+            </td>
+        </tr>
+        <tr>
+            <td>
+            Number: 
+            @Html.TextBox("number")
+            @Html.ValidationMessageFor(model => newBuilding.number, "",new { @class = "text-danger" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+            Address:
+            @Html.TextBox("address")
+            @Html.ValidationMessageFor(model => newBuilding.number, "", new {@class = "text-danger" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+               <input type="submit" value="Append" class="btn btn-default" onclick="postBuilding();" />
+            </td>
+        </tr>
+
+        
+
+    
+    }
 </table>
