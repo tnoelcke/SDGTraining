@@ -23,57 +23,61 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model)
-{
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.address)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-        </td>
-    </tr>
-}
-
-    @using (Html.BeginForm())
+    @foreach (var item in Model)
     {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        
         <tr>
             <td>
-            Name: 
-            @Html.TextBox("name")
-            @Html.ValidationMessageFor(model => newBuilding.name, "", new { @class = "text-danger" }) 
+                @Html.DisplayFor(modelItem => item.name)
             </td>
-        </tr>
-        <tr>
             <td>
-            Number: 
-            @Html.TextBox("number")
-            @Html.ValidationMessageFor(model => newBuilding.number, "",new { @class = "text-danger" })
+                @Html.DisplayFor(modelItem => item.address)
             </td>
-        </tr>
-        <tr>
             <td>
-            Address:
-            @Html.TextBox("address")
-            @Html.ValidationMessageFor(model => newBuilding.number, "", new {@class = "text-danger" })
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
             </td>
         </tr>
-        <tr>
-            <td>
-               <input type="submit" value="Append" class="btn btn-default" onclick="postBuilding();" />
-            </td>
-        </tr>
-
-        
-
-    
     }
 </table>
+    @using (Html.BeginForm("Add","Buildings "))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-vertical">
+            
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <table>
+        
+            <tr>
+                <td>
+                Name: 
+                @Html.TextBox("name")
+                @Html.ValidationMessageFor(model => newBuilding.name, "", new { @class = "text-danger" }) 
+                </td>
+            </tr>
+            <tr>
+                <td>
+                Number: 
+                @Html.TextBox("number")
+                @Html.ValidationMessageFor(model => newBuilding.number, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                Address:
+                @Html.TextBox("address")
+                @Html.ValidationMessageFor(model => newBuilding.number, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <input type="submit" value="Buildings/Append" class="btn btn-default" />
+                </td>
+            </tr>
+        </table>
+      </div>
+
+    }
+<script src="~/scripts/jquery-1.10.2.min.js"></script>
+<script src="~/scripts/postBuilding.js"></script>
+

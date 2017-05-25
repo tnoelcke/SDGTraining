@@ -116,6 +116,13 @@ namespace PeopleProTraining.Controllers
             return RedirectToAction("Index");
         }
 
+        // POST: Buildings/Add
+        [HttpPost, ActionName("Add")]
+        public ActionResult Add()
+        {
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
