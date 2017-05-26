@@ -40,7 +40,7 @@
         </tr>
     }
 </table>
-    @using (Html.BeginForm("Add","Buildings "))
+    @using (Html.BeginForm("Add"))
     {
         @Html.AntiForgeryToken()
         <div class="form-vertical">
@@ -71,7 +71,7 @@
             </tr>
             <tr>
                 <td>
-                <input type="submit" value="Buildings/Append" class="btn btn-default" />
+                <input type="submit" value="Add" class="btn btn-default" />
                 </td>
             </tr>
         </table>

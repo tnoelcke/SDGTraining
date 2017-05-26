@@ -118,9 +118,15 @@ namespace PeopleProTraining.Controllers
 
         // POST: Buildings/Add
         [HttpPost, ActionName("Add")]
-        public ActionResult Add()
+        public ActionResult Add([Bind(Include = "name, number, address")] Building toAdd)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                db.Buildings.Add(toAdd);
+                db.SaveChanges();
+                return PartialView("~/Views/Shared/BuildingRowPartial.cshtml", toAdd);
+            }
+            return null;
         }
 
         protected override void Dispose(bool disposing)
